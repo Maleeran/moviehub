@@ -33,7 +33,7 @@ const Header = ({ onSearch, onClear, query }) => {
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50 opacity-75">
+    <header className="bg-white shadow-sm sticky top-0 z-50 opacity-75 dark:opacity-100 dark:bg-gray-900 ">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo 区域 */}
@@ -41,10 +41,10 @@ const Header = ({ onSearch, onClear, query }) => {
             className="flex items-center gap-2 cursor-pointer group"
             onClick={handleClear}
           >
-            <span className="text-3xl group-hover:scale-110 transition-transform">
+            <span className="text-3xl group-hover:scale-110 transition-transform  text-indigo-700">
               <BiSolidMovie />
             </span>
-            <span className="text-xl font-bold bg-linear-to-r from-indigo-600 to-purple-500 bg-clip-text text-transparent">
+            <span className="text-xl font-bold text-indigo-950 bg-clip-text dark:text-white">
               MovieHub
             </span>
           </div>
@@ -87,7 +87,7 @@ const Header = ({ onSearch, onClear, query }) => {
             {/* 提交按钮 (右侧) */}
             <button
               type="submit"
-              className="absolute right-2 p-2.5 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 active:scale-95 transition-all shadow-md hover:shadow-lg"
+              className="absolute right-2 p-2.5 bg-indigo-700 text-white rounded-full hover:bg-indigo-700 active:scale-95 transition-all shadow-md hover:shadow-lg"
               title="搜索"
             >
               <svg
