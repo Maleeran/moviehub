@@ -1,35 +1,50 @@
 import { useState, useEffect } from "react";
 import { CiSearch, CiSquareRemove } from "react-icons/ci";
 import { BiSolidMovie } from "react-icons/bi";
+import { useLocation, useNavigate } from "react-router";
 
-const Header = ({ onSearch, onClear, query }) => {
+const Header = ({ onSearch, onClear, query = "" }) => {
   const [inputValue, setInputValue] = useState(query || "");
   const [hasFocus, setHasFocus] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // 同步外部 query 变化
   useEffect(() => {
-    setInputValue(query || "");
-  }, [query]);
+    if (location.pathname === "/search") {
+      const params = new URLSearchParams(location.search);
+      const q = params.get("q") || "";
+    } else if (location.pathname === "/" && inputValue) {
+      setInputValue("");
+    }
+  }, [location, query]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputValue.trim()) {
-      onSearch(inputValue.trim());
+      if (location.pathname !== "/search") {
+        navigate("/search");
+      }
+      if (onSearch) {
+        onSearch(inputValue);
+      }
     }
   };
 
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
-    // 实时搜索（可选）
-    // if (value.trim() === "") {
-    //   onClear();
-    // }
   };
 
   const handleClear = () => {
     setInputValue("");
-    onClear();
+    if (onClear) {
+      navigate("/");
+      onClear();
+    }
+    if (location.pathname === "/search") {
+      navigate("/search");
+    }
   };
 
   return (
