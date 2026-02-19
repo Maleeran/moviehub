@@ -58,7 +58,7 @@ const Home = () => {
 
         {!loading && movies.length === 0 && !error && (
           <div className="text-center py-12">
-            <p className="text-gray-600 text-lg">😕 No popular movies yet</p>
+            <p className="text-gray-600 text-lg"> No popular movies yet</p>
           </div>
         )}
 

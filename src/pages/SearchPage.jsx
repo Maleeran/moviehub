@@ -1,9 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useSearchParams } from "react-router";
 import Header from "../Components/Header";
 import MovieList from "../Components/MovieList";
-import { useEffect } from "react";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -88,7 +87,7 @@ const SearchPage = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <h2 className="text-2xl font-bold mb-2">
-            {query ? `🔍 Search results "${query}"` : "🔍 Search movies "}
+            {query ? ` Search "${query}"` : " Search movies "}
           </h2>
           <p className="text-gray-600">
             A total of {movies.length} movies were found.
@@ -110,7 +109,7 @@ const SearchPage = () => {
 
         {!loading && movies.length === 0 && !error && (
           <div className="text-center py-12">
-            <p className="text-gray-600 text-lg">😕 No related movies found</p>
+            <p className="text-gray-600 text-lg"> No related movies found</p>
             <p className="text-gray-500 mt-2">Try changing your keywords?</p>
           </div>
         )}

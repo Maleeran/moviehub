@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
-import { CiSearch, CiSquareRemove } from "react-icons/ci";
 import { BiSolidMovie } from "react-icons/bi";
 import { useLocation, useNavigate } from "react-router";
+import { IconButton, TextField } from "@radix-ui/themes";
+import {
+  ArrowRightIcon,
+  Cross2Icon,
+  MagnifyingGlassIcon,
+} from "@radix-ui/react-icons";
 
 const Header = ({ onSearch, onClear, query = "" }) => {
   const [inputValue, setInputValue] = useState(query || "");
-  const [hasFocus, setHasFocus] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // 同步外部 query 变化
   useEffect(() => {
@@ -29,6 +33,7 @@ const Header = ({ onSearch, onClear, query = "" }) => {
         onSearch(inputValue);
       }
     }
+    setInputValue("");
   };
 
   const handleInputChange = (e) => {
@@ -39,7 +44,7 @@ const Header = ({ onSearch, onClear, query = "" }) => {
   const handleClear = () => {
     setInputValue("");
     if (onClear) {
-      navigate("/");
+      // navigate("/");
       onClear();
     }
     if (location.pathname === "/search") {
@@ -54,7 +59,7 @@ const Header = ({ onSearch, onClear, query = "" }) => {
           {/* Logo 区域 */}
           <div
             className="flex items-center gap-2 cursor-pointer group"
-            onClick={handleClear}
+            onClick={() => navigate("/")}
           >
             <span className="text-3xl group-hover:scale-110 transition-transform  text-indigo-700">
               <BiSolidMovie />
@@ -63,63 +68,42 @@ const Header = ({ onSearch, onClear, query = "" }) => {
               MovieHub
             </span>
           </div>
-
           {/* 搜索表单区域 */}
-          <form
-            onSubmit={handleSubmit}
-            className={`relative flex items-center transition-all duration-300 ${
-              hasFocus ? "w-96 scale-105" : "w-80"
-            }`}
-          >
-            {/* 搜索图标 (左侧) */}
-            <div className="absolute left-4 text-gray-400 hover:text-gray-600 pointer-events-none">
-              <CiSearch />
-            </div>
-
-            {/* 输入框 */}
-            <input
-              type="text"
+          <form onSubmit={handleSubmit}>
+            <TextField.Root
               value={inputValue}
+              radius="full"
+              size="3"
               onChange={handleInputChange}
-              onFocus={() => setHasFocus(true)}
-              onBlur={() => setHasFocus(false)}
               placeholder="Search Movies, Actors..."
-              className="w-full pl-12 pr-16 py-3 bg-gray-100 border border-transparent rounded-full text-gray-700 placeholder-gray-400 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all duration-200"
-            />
-
-            {/* 清空按钮 (仅在有输入时显示) */}
-            {inputValue && (
-              <button
-                type="button"
-                onClick={handleClear}
-                className="absolute right-15 text-gray-400 hover:text-gray-600 transition-colors hover:scale-110"
-                title="清空"
-              >
-                <CiSquareRemove />
-              </button>
-            )}
-
-            {/* 提交按钮 (右侧) */}
-            <button
-              type="submit"
-              className="absolute right-2 p-2.5 bg-indigo-700 text-white rounded-full hover:bg-indigo-700 active:scale-95 transition-all shadow-md hover:shadow-lg"
-              title="搜索"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </button>
+              <TextField.Slot>
+                <MagnifyingGlassIcon height="16" width="16" color="indigo" />
+              </TextField.Slot>
+              {inputValue && (
+                <TextField.Slot pr="1">
+                  <IconButton
+                    size="1"
+                    variant="outline"
+                    color="gray"
+                    radius="small"
+                    onClick={handleClear}
+                  >
+                    <Cross2Icon height="12" width="12" />
+                  </IconButton>
+                </TextField.Slot>
+              )}
+              <TextField.Slot pr="3">
+                <IconButton
+                  size="3"
+                  color="indigo"
+                  radius="full"
+                  variant="ghost"
+                >
+                  <ArrowRightIcon weight="medium" height="18" width="18" />
+                </IconButton>
+              </TextField.Slot>
+            </TextField.Root>
           </form>
         </div>
       </div>
