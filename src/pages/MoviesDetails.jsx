@@ -3,7 +3,8 @@ import { Box, Button, IconButton } from "@radix-ui/themes";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { LuArrowLeft } from "react-icons/lu";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
+import MovieCard from "../components/MovieCard";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -101,12 +102,6 @@ const MoviesDetails = () => {
               <ArrowLeftIcon height="24" width="24" />
             </IconButton>
           </Box>
-          {/* <button
-            className="absolute top-6 left-6 z-10 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition"
-            onClick={() => navigate(-1)}
-          >
-            <LuArrowLeft className="size-8" />
-          </button> */}
         </div>
       </div>
 
@@ -193,6 +188,23 @@ const MoviesDetails = () => {
             </div>
           </div>
         </div>
+
+        {recommendations.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold mb-6">Recommended movies</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {recommendations.map((movie) => (
+                <Link
+                  to={`/movies/${movie.id}`}
+                  key={movie.id}
+                  className="group"
+                >
+                  <MovieCard movie={movie} />
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
