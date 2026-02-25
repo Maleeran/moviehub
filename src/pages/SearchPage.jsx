@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useLocation, useSearchParams } from "react-router";
-import Header from "../Components/Header";
-import MovieList from "../Components/MovieList";
+import Header from "../components/Header";
+import MovieList from "../components/MovieList";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_API_URL;

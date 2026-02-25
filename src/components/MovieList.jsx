@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import MovieCard from "../components/MovieCard";
+import MovieCard from "./MovieCard";
 
 const MovieList = ({ movies }) => {
   return (
