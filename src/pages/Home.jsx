@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import MovieList from "../components/MovieList";
+
 import Header from "../components/Header";
+import MovieList from "../components/MovieList";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_API_URL;
