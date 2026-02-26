@@ -111,4 +111,4 @@ const Header = ({ onSearch, onClear, query = "" }) => {
   );
 };
 
-export default Header;
+export default Header

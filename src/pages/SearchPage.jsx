@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useLocation, useSearchParams } from "react-router";
 
+import MovieList from "../components/MovieList";
 import Header from "../components/Header";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
